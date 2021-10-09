@@ -19,14 +19,12 @@ variable "cluster_name" {
   type = string
   default = "test-cluster"
 }
-variable "aws_key_pair" {
-  type = string
-  default = "test"
-}
+
 variable "env_type" {
   type = string
   default = "dev"
 }
+
 variable "region" {
   type = string
   default = "us-west-1"
@@ -35,11 +33,6 @@ variable "region" {
 variable "default_capacity_provider" {
   type = string
   default = ""
-}
-
-variable "application_keys" {
-  type    = list(string)
-  default = ["alias/applicationConfigKey"]
 }
 
 variable "backend_service_name" {
@@ -59,7 +52,7 @@ variable "task_definition_memory" {
 
 variable "backend_container_image" {
   type = string
-  default = "817514109580.dkr.ecr.us-west-1.amazonaws.com/backend:latest"
+  default = ""
 }
 
 variable "backend_container_port" {
@@ -74,7 +67,7 @@ variable "frontend_service_name" {
 
 variable "frontend_container_image" {
   type = string
-  default = "817514109580.dkr.ecr.us-west-1.amazonaws.com/frontend:latest"
+  default = ""
 }
 
 variable "frontend_container_port" {
@@ -133,39 +126,10 @@ variable "healthcheck_matcher" {
   default     =  "200-299"
 }
 
-variable "create_repository_credentials_iam_policy" {
-  default     = false
-  description = "Set to true if you are specifying `repository_credentials` variable, it will attach IAM policy with necessary permissions to task role."
-}
-
-variable "repository_credentials_kms_key" {
-  default     = "alias/aws/secretsmanager"
-  description = "key id, key ARN, alias name or alias ARN of the key that encrypted the repository credentials"
-  type        = string
-}
-
 variable "log_retention_in_days" {
   description = "Number of days the logs will be retained in CloudWatch."
   default     = 30
   type        = number
-}
-
-variable "logs_kms_key" {
-  type        = string
-  description = "The KMS key ARN to use to encrypt container logs."
-  default     = ""
-}
-
-variable "enable_execute_command" {
-  type        = bool
-  description = "Specifies whether to enable Amazon ECS Exec for the tasks within the service."
-  default     = true
-}
-
-variable "repository_credentials" {
-  default     = ""
-  description = "name or ARN of a secrets manager secret (arn:aws:secretsmanager:region:aws_account_id:secret:secret_name)"
-  type        = string
 }
 
 variable "backend_host_port" {
